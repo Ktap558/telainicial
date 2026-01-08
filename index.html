@@ -2,151 +2,188 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>App Belemitas de Tapauá</title>
     
     <meta name="theme-color" content="#001f3f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="igreja.png">
+    <link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #001f3f; /* Azul Escuro Profundo */
-            min-height: 100vh;
-            /* Evita o scroll elástico no iOS */
-            overscroll-behavior: none;
-        }
-
-        .text-gold {
-            color: #D4AF37; /* Dourado Clássico */
-        }
-
-        .bg-gold-dark {
-            background-color: #D4AF37;
-        }
-
-        .btn-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .btn-card:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            border-color: #D4AF37;
-            transform: translateY(-2px);
-        }
-
-        .btn-card:active {
-            transform: scale(0.96);
-            background-color: rgba(212, 175, 55, 0.2);
-        }
-
-        /* Animação suave de entrada */
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #001f3f; min-height: 100vh; color: white; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        .text-gold { color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .btn-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); transition: 0.3s; cursor: pointer; }
+        .btn-card:active { transform: scale(0.96); background: rgba(212, 175, 55, 0.15); }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-out; }
+        .month-content { display: none; }
+        .month-content.active { display: block; animation: slideDown 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="flex flex-col items-center pb-12 fade-in">
+<body>
 
-    <header class="w-full max-w-md pt-10 pb-8 px-6 text-center">
-        <div class="mb-6 flex justify-center">
-            <img src="igreja.png" alt="Logo Igreja" class="w-32 h-32 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+    <section id="page-home" class="page active flex flex-col items-center pb-12">
+        <header class="w-full max-w-md pt-12 pb-8 px-6 text-center text-white">
+            <div class="mb-6 flex justify-center">
+                <img src="igreja.png" alt="Logo" class="w-32 h-32 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+            </div>
+            <h1 class="text-3xl font-800 tracking-tight leading-tight uppercase text-gold">
+                App Belemitas <br> de Tapauá
+            </h1>
+            <div class="mt-3 flex flex-col items-center">
+                <span class="h-[1px] w-20 bg-gold opacity-50 mb-2"></span>
+                <p class="text-white text-sm font-medium opacity-80 italic">@PastorAdinoRodrigues2026</p>
+            </div>
+        </header>
+
+        <main class="w-full max-w-md px-6 space-y-4">
+            <div onclick="showPage('page-agenda')" class="btn-card flex items-center p-5 rounded-2xl shadow-xl">
+                <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/30"><i class="fas fa-calendar-alt text-xl"></i></div>
+                <div class="flex-1 text-left"><b>AGENDA OFICIAL 2026</b><p class="text-[10px] text-gray-400 uppercase font-bold mt-1">Eventos e Cultos</p></div>
+                <i class="fas fa-chevron-right text-gold/40 text-sm"></i>
+            </div>
+
+            <a href="https://calisthenys.github.io/QOBT/" target="_blank" class="btn-card flex items-center p-5 rounded-2xl shadow-xl">
+                <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/30"><i class="fas fa-user-tie text-xl"></i></div>
+                <div class="flex-1"><b>LISTA DE OBREIROS</b><p class="text-[10px] text-gray-400 uppercase font-bold mt-1">Consulta QOBT</p></div>
+                <i class="fas fa-chevron-right text-gold/40 text-sm"></i>
+            </a>
+
+            <a href="https://ktap558.github.io/cooperadores/" target="_blank" class="btn-card flex items-center p-5 rounded-2xl shadow-xl">
+                <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/30"><i class="fas fa-users text-xl"></i></div>
+                <div class="flex-1"><b>QUADRO DE COOPERADORES</b><p class="text-[10px] text-gray-400 uppercase font-bold mt-1">Escalas de Apoio</p></div>
+                <i class="fas fa-chevron-right text-gold/40 text-sm"></i>
+            </a>
+        </main>
+        
+        <footer class="mt-auto pt-12 text-center">
+            <p class="text-gold text-[10px] uppercase tracking-[4px] font-bold opacity-70">Unidos em Cristo</p>
+            <button id="installApp" class="hidden mt-6 text-white/40 text-[10px] border border-white/20 px-4 py-2 rounded-full uppercase">Instalar Aplicativo</button>
+        </footer>
+    </section>
+
+    <section id="page-agenda" class="page min-h-screen">
+        <header class="p-4 border-b border-gold/10 flex justify-between items-center sticky top-0 bg-[#001f3f]/90 backdrop-blur-md z-40">
+            <button onclick="showPage('page-home')" class="text-gold text-sm font-bold flex items-center"><i class="fas fa-chevron-left mr-2"></i> VOLTAR</button>
+            <h1 class="text-gold font-bold uppercase tracking-tighter text-center flex-1">Agenda 2026</h1>
+            <button onclick="acessoAdmin()" class="bg-gold/10 w-8 h-8 rounded-full text-gold flex items-center justify-center"><i class="fas fa-lock text-xs" id="lock-icon"></i></button>
+        </header>
+
+        <main id="meses-container" class="p-4 space-y-4 max-w-md mx-auto"></main>
+
+        <div id="admin-panel" class="hidden fixed inset-0 bg-black/95 p-6 z-50 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-gold mb-8"><h2 class="text-xl font-bold uppercase">Novo Evento</h2><button onclick="fecharAdmin()" class="text-3xl">&times;</button></div>
+            <form id="eventForm" class="space-y-4 max-w-sm mx-auto w-full text-left">
+                <input type="text" id="titulo" placeholder="Nome do Evento" class="w-full p-4 rounded-xl bg-white/5 border border-gold/20 text-white outline-none focus:border-gold" required>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="date" id="data" class="w-full p-4 rounded-xl bg-white/5 border border-gold/20 text-white outline-none" required>
+                    <input type="time" id="hora" class="w-full p-4 rounded-xl bg-white/5 border border-gold/20 text-white outline-none" required>
+                </div>
+                <select id="categoria" class="w-full p-4 rounded-xl bg-white/5 border border-gold/20 text-gold outline-none">
+                    <option value="blue">🔵 CULTO GERAL</option>
+                    <option value="pink">🌸 CÍRCULO DE ORAÇÃO</option>
+                    <option value="green">🟢 JOVENS / UMADEB</option>
+                </select>
+                <button type="submit" class="w-full bg-gold text-blue-900 font-bold p-5 rounded-2xl shadow-lg uppercase">Publicar Evento</button>
+            </form>
         </div>
-        
-        <h1 class="text-3xl font-800 tracking-tight leading-tight uppercase text-gold">
-            App Belemitas <br> de Tapauá
-        </h1>
-        
-        <div class="mt-3 flex flex-col items-center">
-            <span class="h-[1px] w-20 bg-gold-dark opacity-50 mb-2"></span>
-            <p class="text-white text-sm font-medium opacity-80 italic">
-                @PastorAdinoRodrigues2026
-            </p>
-        </div>
-    </header>
+    </section>
 
-    <main class="w-full max-w-md px-6 space-y-5">
-        
-        <a href="https://ktap558.github.io/calendario/" class="btn-card flex items-center p-5 rounded-2xl shadow-2xl group">
-            <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/40">
-                <i class="fas fa-calendar-alt text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h2 class="font-bold text-white group-hover:text-gold transition-colors">AGENDA OFICIAL 2026</h2>
-                <p class="text-[10px] text-gray-400 uppercase font-semibold tracking-widest mt-1">Consultar Eventos</p>
-            </div>
-            <i class="fas fa-chevron-right text-gold opacity-50 group-hover:opacity-100 transition-opacity"></i>
-        </a>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        <a href="https://calisthenys.github.io/QOBT/" class="btn-card flex items-center p-5 rounded-2xl shadow-2xl group">
-            <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/40">
-                <i class="fas fa-user-tie text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h2 class="font-bold text-white group-hover:text-gold transition-colors">LISTA DE OBREIROS</h2>
-                <p class="text-[10px] text-gray-400 uppercase font-semibold tracking-widest mt-1">Consulta QOBT</p>
-            </div>
-            <i class="fas fa-chevron-right text-gold opacity-50 group-hover:opacity-100 transition-opacity"></i>
-        </a>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxDakFjYinP8iiKGhetGmeEYlrDJ7r9eE",
+            authDomain: "calendariobelemita.firebaseapp.com",
+            projectId: "calendariobelemita",
+            storageBucket: "calendariobelemita.firebasestorage.app",
+            messagingSenderId: "973923072492",
+            appId: "1:973923072492:web:bdf0ce2808343fa6e1e8c9"
+        };
 
-        <a href="https://ktap558.github.io/cooperadores/" class="btn-card flex items-center p-5 rounded-2xl shadow-2xl group">
-            <div class="bg-gold/20 text-gold w-12 h-12 flex items-center justify-center rounded-full mr-4 border border-gold/40">
-                <i class="fas fa-users text-xl"></i>
-            </div>
-            <div class="flex-1">
-                <h2 class="font-bold text-white group-hover:text-gold transition-colors">QUADRO DE COOPERADORES</h2>
-                <p class="text-[10px] text-gray-400 uppercase font-semibold tracking-widest mt-1">Escalas de Apoio</p>
-            </div>
-            <i class="fas fa-chevron-right text-gold opacity-50 group-hover:opacity-100 transition-opacity"></i>
-        </a>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let isAdmin = false;
 
-    </main>
+        window.showPage = (id) => {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        };
 
-    <footer class="mt-auto pt-12 text-center px-6">
-        <p class="text-gold text-[10px] uppercase tracking-[4px] font-bold opacity-70">Unidos em Cristo</p>
-        <div class="w-10 h-[1px] bg-gold-dark mx-auto mt-2 opacity-30"></div>
-        
-        <button id="installApp" class="hidden mt-6 text-white/50 text-xs border border-white/20 px-4 py-2 rounded-full hover:text-gold hover:border-gold transition-all">
-            <i class="fas fa-download mr-2"></i>Instalar Aplicativo
-        </button>
-    </footer>
+        window.acessoAdmin = () => {
+            if(isAdmin) { document.getElementById('admin-panel').classList.remove('hidden'); return; }
+            const s = prompt("Senha ADM:");
+            if(s === "IGREJA2026") { 
+                isAdmin = true; 
+                document.getElementById('lock-icon').className = "fas fa-plus";
+                renderizar();
+                alert("Acesso autorizado!");
+            }
+        };
 
-    <script>
-        // Lógica básica para capturar o evento de instalação no Android
+        window.fecharAdmin = () => document.getElementById('admin-panel').classList.add('hidden');
+        window.toggleMonth = (id) => document.getElementById(id).classList.toggle('active');
+        window.excluirEvento = async (id) => { if(confirm("Apagar evento?")) await deleteDoc(doc(db, "eventos", id)); };
+
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "eventos"), {
+                    titulo: document.getElementById('titulo').value,
+                    data: document.getElementById('data').value,
+                    hora: document.getElementById('hora').value,
+                    categoria: document.getElementById('categoria').value
+                });
+                document.getElementById('eventForm').reset();
+                fecharAdmin();
+            } catch (e) { alert("Erro ao salvar! Verifique as regras do Firebase."); }
+        });
+
+        const mesesNomes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        function renderizar() {
+            onSnapshot(query(collection(db, "eventos"), orderBy("data", "asc")), (snap) => {
+                const cont = document.getElementById('meses-container');
+                cont.innerHTML = "";
+                let grupos = {};
+                snap.forEach(d => {
+                    const dataObj = new Date(d.data().data + "T00:00:00");
+                    const m = mesesNomes[dataObj.getMonth()];
+                    if(!grupos[m]) grupos[m] = [];
+                    grupos[m].push({...d.data(), id: d.id});
+                });
+                for(let m in grupos) {
+                    let h = `<div class="border border-gold/10 rounded-2xl overflow-hidden bg-white/5"><button onclick="toggleMonth('${m}')" class="w-full p-5 text-gold font-bold text-left flex justify-between uppercase text-xs tracking-widest">${m} <i class="fas fa-chevron-down opacity-20"></i></button><div id="${m}" class="month-content p-4 space-y-3 bg-black/20 text-left">`;
+                    grupos[m].forEach(ev => {
+                        h += `<div class="bg-white/5 p-4 rounded-xl border-l-4 border-gold flex justify-between items-center text-left"><div><small class="text-gold font-bold text-[9px] uppercase">${ev.data.split('-').reverse().join('/')} • ${ev.hora}H</small><br><b class="text-sm">${ev.titulo}</b></div>${isAdmin ? `<button onclick="excluirEvento('${ev.id}')" class="text-red-400 p-2"><i class="fas fa-trash-alt"></i></button>` : ''}</div>`;
+                    });
+                    cont.innerHTML += h + `</div></div>`;
+                }
+            });
+        }
+        renderizar();
+
+        // PWA Install
         let deferredPrompt;
-        const installBtn = document.getElementById('installApp');
-
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBtn.classList.remove('hidden');
+            document.getElementById('installApp').classList.remove('hidden');
         });
-
-        installBtn.addEventListener('click', () => {
+        document.getElementById('installApp').addEventListener('click', () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        installBtn.classList.add('hidden');
-                    }
-                    deferredPrompt = null;
-                });
+                deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installApp').classList.add('hidden'); });
             }
         });
     </script>
