@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Belemitas de Tapauá</title>
+    
+    <meta name="theme-color" content="#001f3f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="igreja.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         
@@ -13,20 +21,23 @@
             font-family: 'Inter', sans-serif; 
             background-color: #001f3f; /* Azul Escuro Profundo */
             min-height: 100vh;
+            /* Evita o scroll elástico no iOS */
+            overscroll-behavior: none;
         }
 
         .text-gold {
             color: #D4AF37; /* Dourado Clássico */
         }
 
-        .border-gold {
-            border-color: #D4AF37;
+        .bg-gold-dark {
+            background-color: #D4AF37;
         }
 
         .btn-card {
             background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.3);
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-card:hover {
@@ -36,15 +47,26 @@
         }
 
         .btn-card:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            background-color: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Animação suave de entrada */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="flex flex-col items-center pb-12">
+<body class="flex flex-col items-center pb-12 fade-in">
 
     <header class="w-full max-w-md pt-10 pb-8 px-6 text-center">
         <div class="mb-6 flex justify-center">
-            <img src="igreja.png" alt="Logo Igreja" class="w-32 h-32 object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+            <img src="igreja.png" alt="Logo Igreja" class="w-32 h-32 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
         </div>
         
         <h1 class="text-3xl font-800 tracking-tight leading-tight uppercase text-gold">
@@ -52,7 +74,7 @@
         </h1>
         
         <div class="mt-3 flex flex-col items-center">
-            <span class="h-[1px] w-20 bg-gold opacity-50 mb-2"></span>
+            <span class="h-[1px] w-20 bg-gold-dark opacity-50 mb-2"></span>
             <p class="text-white text-sm font-medium opacity-80 italic">
                 @PastorAdinoRodrigues2026
             </p>
@@ -96,10 +118,37 @@
 
     </main>
 
-    <footer class="mt-auto pt-12 text-center">
+    <footer class="mt-auto pt-12 text-center px-6">
         <p class="text-gold text-[10px] uppercase tracking-[4px] font-bold opacity-70">Unidos em Cristo</p>
-        <div class="w-10 h-[1px] bg-gold mx-auto mt-2 opacity-30"></div>
+        <div class="w-10 h-[1px] bg-gold-dark mx-auto mt-2 opacity-30"></div>
+        
+        <button id="installApp" class="hidden mt-6 text-white/50 text-xs border border-white/20 px-4 py-2 rounded-full hover:text-gold hover:border-gold transition-all">
+            <i class="fas fa-download mr-2"></i>Instalar Aplicativo
+        </button>
     </footer>
 
+    <script>
+        // Lógica básica para capturar o evento de instalação no Android
+        let deferredPrompt;
+        const installBtn = document.getElementById('installApp');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.classList.remove('hidden');
+        });
+
+        installBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        installBtn.classList.add('hidden');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
